@@ -2,11 +2,11 @@
 
 ##### *Doing What*
 
-- track changs in a directory and recode them
+- track changes in a directory and recode them
 - regress the changed directory
-- simulate making changes(caused by installing) by adding Timestamps to the end of files
+- simulate making changes(caused by installing) by adding timestamps to the end of files
 - zip files
-- do erasure coding for this zip file: encode and decode
+- do erasure code for this zip file: encode and decode
 
 ##### *How To Do*
 
@@ -20,6 +20,6 @@
 
 ##### *New In Next Version*
 
-- support more zip command
-- fit parameters into real need
+- support more zip commands
+- fit parameters into real needs
 - ...

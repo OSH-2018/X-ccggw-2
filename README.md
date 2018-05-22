@@ -18,12 +18,12 @@
 - [PDF](docs/ResearchReport/分布式包分发系统调研报告.pdf)
 - [Word](docs/ResearchReport/分布式包分发系统调研报告.docx)
 
-## *FeasibilityReport*
+## *Feasibility Report*
 
 - [PDF](docs/FeasibilityReport/可行性分析.pdf)
 - [Word](docs/FeasibilityReport/可行性分析.docx)
 
-## *Mid-termReport*
+## *Mid-term Report*
 
 - [Keynote](docs/Mid-termReport/donut.key)
 - [HTML](docs/Mid-termReport/donut)

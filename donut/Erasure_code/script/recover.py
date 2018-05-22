@@ -4,7 +4,7 @@ import time
 
 
 class Recover(object):
-    """a class tracks the change of file and is capable of recovering it"""
+    """a class tracks the changes of files and is capable of regressing them"""
 
     def __init__(self, path, ec_path):
         self.path = path
@@ -62,11 +62,20 @@ class Recover(object):
 class ErasureCode(object):
     """ zip the file and make erasure code """
     def __init__(self, name):
-        self.zip = ".bz2"
+        self.zip = ".bz2" # get this information from meta.txt later
         self.name = name
         self.tarname = ""
+        self.block = 4 # need a fucntion
+        self.ec_block = 2
+
+    def get_block_num(self):
+        pass
+
+    def get_ec_block_num(self):
+        pass
 
     def zip_dir(self):
+        # source package and binary 
         command = ""
         if self.zip == "tar":
             command = "tar cvf {}.tar {}".format(self.name, self.name)
@@ -89,4 +98,3 @@ class ErasureCode(object):
             os.system("rm " + self.tarname)
         command = "./decoder '{}'".format(self.tarname)
         os.system(command)
-        # shutil.rmtree("erasure_code")
