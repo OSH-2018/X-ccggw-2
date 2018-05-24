@@ -6,10 +6,10 @@
 
 ## *Members*
 #### *Storage*
--    柴磊[@charleyustccs](https://github.com/charleyustccs)
+-    柴磊[@Charley](https://github.com/charleyustccs)
 -    顾健鑫
 #### *Architecture*
--    归舒睿
+-    归舒睿[@Citrine](https://github.com/CM-BF)
 -    吴豫章
 -    陈俊羽
 
@@ -27,6 +27,14 @@
 
 - [Keynote](docs/Mid-termReport/donut.key)
 - [HTML](docs/Mid-termReport/donut)
+
+## *Progress*
+
+- [X] Erasure code
+- [X] Track changes
+- [X] Regress packages
+- [X] Zip/Unzip packages
+- [X] P2P connection
 
 
 
