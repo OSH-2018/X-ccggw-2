@@ -35,6 +35,9 @@
 - [X] Regress packages
 - [X] Zip/Unzip packages
 - [X] P2P connection
+- [X] Send/Recive packages
+- [X] IP <=> ID
+- [X] DNS Server
 
 
 

@@ -1,0 +1,12 @@
+[source]
+name = ubuntu
+maxNode = 10000
+split = 10
+restore = 15
+
+[general]
+mirrors = http://mirrors.ustc.edu.cn/ubuntu/
+meta = meta_abcdef
+path = .
+retry = 3
+
