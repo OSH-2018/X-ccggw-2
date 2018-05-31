@@ -23,7 +23,7 @@ The detail:
 ![](pic/zip02.png)
 Our problem is that the zip file can will ocntain the time when ziped file is least modified, this feature causes that different machines zip different zip files. For the purpose of using *erasure coding*, we need to make sure they are not different. The *time stamp* may be the break hole!
 #### *Test*
-Same file, just time stamp is different:
+Same file, just time stamp is different:
 ![](pic/zip03.png)
 #### *Solution*
 We find avary time stamp‘s previous code always "1400 0000 0800".
