@@ -39,10 +39,12 @@
 - [x] Erasure code
 - [x] Track changes
 - [x] Regress packages
-- [x] Zip/Unzip packages
+- [x] rebuild deb packages
 - [x] P2P connection
 - [x] Send/Recive packages
+- [X] Index local software
+- [X] rebuild uniform packages from different machines on different times
+- [X] ID block's building and updating ...
 - [ ] IP <=> ID
 - [ ] DNS Server
-- [ ] Index local software
 - [ ] Blocks sync
