@@ -83,6 +83,7 @@ class Block(object):
         """because of the encoder's limited ability, copy the archive to the work_place, sent back the
         erasure codes after calculating"""
         command = "./encoder '{}' 4 2 'reed_sol_van' 8 8 1024".format(self.package_name)
+        print(command)
         os.system(command)
         shutil.copytree("{}/erasure_code".format(os.getcwd()), self.block_path)
         os.remove(self.package_name)

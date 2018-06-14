@@ -22,7 +22,6 @@ class Collector(object):
         this json file will store forever, and update after every package install or uninstall"""
         temp_install = "{}/installed".format(self.top_path)
         command = "dpkg -l > {}".format(temp_install)
-        print(command)
         os.system(command)
         with open(temp_install, 'r') as f:
             list = f.readlines()
@@ -98,6 +97,7 @@ class Collector(object):
                 # os.mkdir("test{}".format(file))
                 shutil.copytree(src=file, dst="test{}".format(file))
 
+    # TODO: fix the bug
     def extract_control(self, version=None):
         """get a package's control information"""
         info_path = "/var/lib/dpkg/status"
@@ -167,21 +167,3 @@ class Collector(object):
         if os.path.exists("test"):
             shutil.rmtree("test")
 
-
-# TODO: test below methods one by one
-def test():
-    a = Collector('gcc-8-base')
-    a.extract_installed_package()
-    a.package_exist()
-    a.collector_file()
-    control_info = a.get_control()
-    if control_info is not None:
-        os.mkdir("test/DEBIAN")
-        with open("test/DEBIAN/control", 'w') as file:
-            file.write(control_info)
-        a.fix_control("test/DEBIAN/control")
-    a.extract_md5()
-    a.build()
-    a.clean()
-
-test()
