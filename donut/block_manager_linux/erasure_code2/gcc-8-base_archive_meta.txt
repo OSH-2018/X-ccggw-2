@@ -1,6 +1,0 @@
-gcc-8-base_archive.zip
-20839
-4 2 8 8 1024
-reed_sol_van
-0
-21
