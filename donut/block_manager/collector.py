@@ -122,6 +122,14 @@ class Collector(object):
         elif len(result) == 0:
             return None
 
+    def get_control(self):
+        command = 'apt-cache show {} > control_temp'.format(self.package_name)
+        os.system(command)
+        f = open('control_temp', 'r')
+        control_info = f.read()
+        f.close()
+        return control_info
+
     def extract_md5(self):
         """get the md5 of usr/lib/share/doc/*"""
         command = "dpkg-query -c {} > where_md5".format(self.package_name)
@@ -155,22 +163,25 @@ class Collector(object):
         os.remove("installed")
         os.remove("where_md5")
         os.remove("location")
+        os.remove("control_temp")
+        if os.path.exists("test"):
+            shutil.rmtree("test")
 
 
 # TODO: test below methods one by one
 def test():
-    a = Collector('zip')
+    a = Collector('gcc-8-base')
     a.extract_installed_package()
     a.package_exist()
     a.collector_file()
-    control_info = a.extract_control()
+    control_info = a.get_control()
     if control_info is not None:
         os.mkdir("test/DEBIAN")
         with open("test/DEBIAN/control", 'w') as file:
             file.write(control_info)
         a.fix_control("test/DEBIAN/control")
     a.extract_md5()
-    a.clean()
     a.build()
+    a.clean()
 
 test()
