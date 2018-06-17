@@ -16,30 +16,33 @@ class Protocol(RPCProtocol):
     def __init__(self, sourceNode, storage, ksize):
         RPCProtocol.__init__(self)
         self.router = RoutingTable(self, ksize, sourceNode)
-        self.storage = storage
+        self.idblock = storage
         self.sourceNode = sourceNode
 
-    def rpc_get_id(self, sender):
-      '''
-      得到id信息
-      '''
-      source = Node(nodeid, sender[0], sender[1])
-      self.welcomeIfNewNode(source)
-      dic={}
-      dic['id']=self.sourceNode.id
-      dic['l_id'] = self.sourceNode.l_id
-      dic['r_id'] = self.sourceNode.r_id
-      return dic
+    def store(self, sender, nodeid, key, value):
+       '''
+       移交id表块    
+       '''
+       source = Node(nodeid, sender[0], sender[1])
+       self.welcomeIfNewNode(source)
+       self.idblock[key] = value
+       return True
+       pass
 
-    def rpc_ping(self, sender, nodeid):
+    def ping(self, sender, nodeid):
         ''' 
         ping操作,检测是否在线
         '''
         source = Node(nodeid, sender[0], sender[1])
         self.welcomeIfNewNode(source)
-        return self.sourceNode.id
+        dic = {}
+        dic['id'] = self.sourceNode.id
+        dic['l_id'] = self.sourceNode.l_id
+        dic['r_id'] = self.sourceNode.r_id
+        #返回一个包含节点与它左右最近的节点的字典
+        return dic
 
-    def rpc_find_node(self, sender, nodeid, key):
+    def find_node(self, sender, nodeid, key):
         '''
         寻找节点
         '''
@@ -49,8 +52,14 @@ class Protocol(RPCProtocol):
         self.welcomeIfNewNode(source)
         node = Node(key)
         neighbors = self.router.findNeighbors(node, exclude=source)
+        #找出离目标节点最近的若干节点
         return list(map(tuple, neighbors))
 
+    #协程操作
+    async def callStore(self, nodeToAsk, key, value):
+        address = (nodeToAsk.ip, nodeToAsk.port)
+        result = await self.store(address, self.sourceNode.id, key, value)
+        return self.handleCallResponse(result, nodeToAsk)
 
     async def callFindNode(self, nodeToAsk, nodeToFind):
         address = (nodeToAsk.ip, nodeToAsk.port)
@@ -64,33 +73,28 @@ class Protocol(RPCProtocol):
         result = await self.ping(address, self.sourceNode.id)
         return self.handleCallResponse(result, nodeToAsk)
 
-    async def callGetId(self, nodeToAsk):
-        address = (nodeToAsk.ip, nodeToAsk.port)
-        result = await self.get_id(address, self.sourceNode.id)
-        return self.handleCallResponse(result, nodeToAsk)
 
 
     def welcomeIfNewNode(self, node):
         '''
-        对新节点进行处理 （未完成
+        对新节点进行处理 
         '''
         if not self.router.isNewNode(node):
             return
-        '''
         log.info("never seen %s before, adding to router", node)
         for key, value in self.storage.items():
+        #检查节点是否离某些负责文件的id近
             keynode = Node(digest(key))
             neighbors = self.router.findNeighbors(keynode)
+        #找出离目标节点最近的若干节点
             if len(neighbors) > 0:
-                last = neighbors[-1].distanceTo(keynode)
-                newNodeClose = node.distanceTo(keynode) < last
-                first = neighbors[0].distanceTo(keynode)
-                thisNodeClosest = self.sourceNode.distanceTo(keynode) < first
-            if len(neighbors) == 0 or (newNodeClose and thisNodeClosest):
+                second = neighbors[1].distanceTo(keynode)
+            if len(neighbors) == 0 or (node.distanceTo(keynode)<second):
                 asyncio.ensure_future(self.callStore(node, key, value))
+        #如果节点离负责id表块的id更近 则通知存储
         self.router.addContact(node)
+        #将该节点加入路由表
 
-     '''
     def handleCallResponse(self, result, node):
         """
         对回应进行处理
