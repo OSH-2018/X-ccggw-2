@@ -34,6 +34,11 @@
 - [Keynote](docs/Mid-termReport/donut.key)
 - [HTML](docs/Mid-termReport/donut)
 
+## *Final Report*
+
+- [Keynote](docs/FinalReport/Donut.key)[注：由于没有备份，keynote不完成，见谅]
+- [Word](docs/FinalReport/结题报告.docx)
+
 ## *Progress*
 
 - [x] Erasure code
@@ -45,6 +50,6 @@
 - [X] Index local software
 - [X] rebuild uniform packages from different machines on different times
 - [X] ID block's building and updating ...
-- [ ] IP <=> ID
-- [ ] DNS Server
-- [ ] Blocks sync
+- [X] IP <=> ID
+- [X] DNS Server
+- [X] Blocks sync
