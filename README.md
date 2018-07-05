@@ -36,7 +36,7 @@
 
 ## *Final Report*
 
-- [Keynote](docs/FinalReport/Donut.key)[注：由于没有备份，keynote不完成，见谅]
+- [Keynote](docs/FinalReport/Donut.key)[注：由于没有备份，macOS Mojave bug导致数据丢失，故keynote不完整，见谅]
 - [Word](docs/FinalReport/结题报告.docx)
 
 ## *Progress*
